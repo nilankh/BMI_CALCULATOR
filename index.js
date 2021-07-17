@@ -17,7 +17,7 @@ for (const i of data) {
   // console.log(typeof(weight))
   // console.log(typeof(height))
   var bmi = weight / (height * height)
-  console.log('BMIII', bmi)
+  // console.log('BMIII', bmi)
   var temp = []
   temp['bmi'] = bmi
   // calculate BMI category
@@ -53,15 +53,13 @@ for (const i of data) {
 console.log('Data output------')
 console.log('ANS', ans)
 
-app.get('/bmicalculator', (req, res) => {
-  return res.sendFile(__dirname + '/bmi.html')
-})
-app.post('/bmicalculator', (req, res) => {
-  var weight = parseFloat(req.body.weight)
-  var height = parseFloat(req.body.height)
-  var bmi = weight / (height * height)
-  res.send('BMI IS :' + bmi)
-})
+
+// app.post('/bmicalculator', (req, res) => {
+//   var weight = parseFloat(req.body.weight)
+//   var height = parseFloat(req.body.height)
+//   var bmi = weight / (height * height)
+//   res.send('BMI IS :' + bmi)
+// })
 const port = process.env.PORT || 8000
 app.listen(8000, () => {
   console.log(`App listening on port ${port}!`)
