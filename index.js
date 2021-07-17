@@ -10,14 +10,17 @@ const data = require('./data/data.json')
 console.log('-----data Input----')
 console.log(data)
 
+
+var count = 0
+// Traversing over data
 for (const i of data) {
+  
   var weight = i['WeightKg']
   var height = i['HeightCm'] / 100
 
-  // console.log(typeof(weight))
-  // console.log(typeof(height))
+ 
   var bmi = weight / (height * height)
-  // console.log('BMIII', bmi)
+ 
   var temp = []
   temp['bmi'] = bmi
   // calculate BMI category
@@ -33,6 +36,7 @@ for (const i of data) {
   } else if (25 <= bmi && bmi <= 29.9) {
     g = 'Overweight'
     h = 'Enhanced Risk'
+    count += 1
   } else if (30 <= bmi && bmi <= 34.9) {
     g = 'Moderately obese'
     h = 'Medium Risk'
@@ -47,19 +51,13 @@ for (const i of data) {
   temp['Health risk'] = h
   ans.push(temp)
 
-  // console.log(i["HeightCm"])
+  
 }
 
 console.log('Data output------')
 console.log('ANS', ans)
+console.log(`Count of total number of overweight people: ${count}`)
 
-
-// app.post('/bmicalculator', (req, res) => {
-//   var weight = parseFloat(req.body.weight)
-//   var height = parseFloat(req.body.height)
-//   var bmi = weight / (height * height)
-//   res.send('BMI IS :' + bmi)
-// })
 const port = process.env.PORT || 8000
 app.listen(8000, () => {
   console.log(`App listening on port ${port}!`)
