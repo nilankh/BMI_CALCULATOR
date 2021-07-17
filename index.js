@@ -1,4 +1,5 @@
 const express = require('express')
+const data = require('./data/data.json')
 const app = express()
 
 // when we call express.json() method, this method returns a function, a middleware function, the job of this middleware function is to read the request, and if there is json object in the body of the request, it will parse the body of the request, into json object and then it will set to the req.body property.
@@ -6,27 +7,25 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 // when we call express.urlencoded() method,this method return  a function a middleware function, this middleware function parses incoming request with urlencoded payloads, that is req with body like this key=value&key=value
 var ans = []
-const data = require('./data/data.json')
-console.log('-----data Input----')
-console.log(data)
 
+console.log('-----------------------------data Input--------------------------')
+console.log(data)
 
 var count = 0
 // Traversing over data
 for (const i of data) {
-  
-  var weight = i['WeightKg']
-  var height = i['HeightCm'] / 100
+  let weight = i['WeightKg']
+  let height = i['HeightCm'] / 100
 
- 
-  var bmi = weight / (height * height)
- 
-  var temp = []
+  //  Calculating BMI
+  let bmi = weight / (height * height)
+
+  let temp = []
   temp['bmi'] = bmi
   // calculate BMI category
   //   Calculate Health risk
-  var g = ''
-  var h = ''
+  let g = ''
+  let h = ''
   if (bmi < 18.5) {
     g = 'Underweight'
     h = 'Malnutrition risk'
@@ -50,12 +49,11 @@ for (const i of data) {
   temp['Bmi Category'] = g
   temp['Health risk'] = h
   ans.push(temp)
-
-  
 }
 
-console.log('Data output------')
+console.log('---------------------------Data output--------------------------')
 console.log('ANS', ans)
+// Total Number of overweight people
 console.log(`Count of total number of overweight people: ${count}`)
 
 const port = process.env.PORT || 8000
